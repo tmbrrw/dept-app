@@ -1,0 +1,43 @@
+html {
+    font-size: 62.5%;
+    background-color: #eee;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    font-weight: 400;
+    background: white;
+    font-family: $font-opensans;
+}
+
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+p {
+    margin-bottom: 4rem;
+}
+
+
+main {
+    position: relative;
+    z-index: 5;
+}
+
+
+section {
+    &[data-anim] {
+    }
+    &[data-anim="true"] {
+    }
+}
+
+
+
+
+a {
+}

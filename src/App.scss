@@ -1,0 +1,9 @@
+// Master scss file
+
+// Global/Abstract
+@import './scss/vars.scss';
+@import './scss/body.scss';
+@import './scss/typography.scss';
+
+// Components
+@import './scss/search.scss';

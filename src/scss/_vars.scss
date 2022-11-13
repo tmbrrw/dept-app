@@ -1,0 +1,23 @@
+// Imports
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+// Colours
+$purple: #7935af;
+$blue: #4277ad;
+$grey: #bebebe;
+
+// Fonts
+$font-opensans: 'open sans', Helvetica, Arial, sans-serif;
+
+// Mixins
+@mixin grad($start, $end) {
+    background: linear-gradient(90deg, $start, $end);
+}
+
+@mixin icon($colour, $svg) {
+    mask-image: url($svg);
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    background-color: $colour;
+}
