@@ -10,19 +10,6 @@ export const Search = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState([]);
 
-  // Handle click
-  const handleClick = (e, set) => {
-    let fieldValue = e.target.value || false;
-
-    // If searchterm in field, force true
-    if (fieldValue) {
-      setClicked(true);
-    } else {
-      // else act as normal
-      setClicked(set);
-    }
-  };
-
   const handleSuggestions = (e) => {
     const value = e.target.value;
     let results = [];
@@ -49,7 +36,6 @@ export const Search = () => {
     };
 
     getCities();
-    
   }, []);
 
   const getMeasurements = async (city) => {
@@ -57,68 +43,91 @@ export const Search = () => {
     const options = { method: "GET", headers: { accept: "application/json" } };
 
     await fetch(url, options).then(
-      (res) => res.ok && res.json()
-        .then((json) => {
-          setSelected(selected => [...selected, json.results[0]]);
+      (res) =>
+        res.ok &&
+        res.json().then((json) => {
+          setSelected((selected) => [...selected, json.results[0]]);
         })
     );
   };
 
   return (
     <>
-      <div className="search__content">
-        <h1>Compare your Air</h1>
-        <p>
-          Compare the air quality between cities in the UK. Select cities to
-          compare using the search bar below.
-        </p>
-      </div>
-      <div className="search">
-        <div
-          className={`search__field search--city ${clicked ? "active" : ""}`}
-          onFocus={(e) => handleClick(e, true)}
-          onBlur={(e) => handleClick(e, false)}
-        >
-          <label>Enter city name...</label>
-          <input
-            autoComplete="off"
-            id="search-location"
-            type="text"
-            value={searchTerm}
-            onChange={(e) => {
-              setSearchTerm(e.target.value);
-              handleSuggestions(e);
-            }}
-          />
+      <section className="search">
+        <div className="container">
+          <div className="search__content">
+            <div className="content__wrap">
+              <h1>Compare your Air</h1>
+              <p>
+                Compare the air quality between cities in the UK. Select cities
+                to compare using the search bar below.
+              </p>
+            </div>
+          </div>
+          <div>
+            <div className="search__wrap">
+              <div
+                className={`search__field search--city ${
+                  clicked ? "active" : ""
+                }`}
+                onFocus={() => {
+                  setClicked(true)
+                }}
+                onBlur={(e) => {
+                  (!e.target.value) && setClicked(false)
+                }}
+              >
+                <label>Enter city name...</label>
+                <input
+                  autoComplete="off"
+                  id="search-location"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    handleSuggestions(e);
+                  }}
+                />
+              </div>
+              {searchTerm !== "" ? (
+                <ul>
+                  {!suggestions.length ? (
+                    <li>Oops, no results found</li>
+                  ) : (
+                    suggestions.map((item, index) => {
+                      return (
+                        <li
+                          key={index}
+                          data-id={item.city}
+                          onClick={(e) => {
+                            getMeasurements(e.target.dataset.id);
+                            if(selected.length === 1) {
+                              setSearchTerm("")
+                              setClicked(false)
+                            }
+                          }}
+                        >
+                          {item.city}
+                          <span>
+                            {item.country === "GB" ? "UK" : item.country}
+                          </span>
+                        </li>
+                      );
+                    })
+                  )}
+                </ul>
+              ) : (
+                <noscript />
+              )}
+            </div>
+          </div>
+          <div className="search__compare">
+            <div className="search__compare-wrap">
+              {selected.length > 0 && <ResultCard locations={selected} />}
+            </div>
+          </div>
         </div>
-        {searchTerm !== "" ? (
-          <ul>
-            {!suggestions.length ? (
-              <li>Oops, no results found</li>
-            ) : (
-              suggestions.map((item, index) => {
-                return (
-                  <li
-                    key={index}
-                    data-id={item.city}
-                    onClick={(e) => {
-                      getMeasurements(e.target.dataset.id);
-                    }}
-                  >
-                    {item.city}
-                    <span>{item.country === "GB" ? "UK" : item.country}</span>
-                  </li>
-                );
-              })
-            )}
-          </ul>
-        ) : (
-          <noscript />
-        )}
-      </div>
-      {/* {  console.log("selected", Array.isArray(selected), selected)} */}
-      {  console.log("beforeCard", selected)}
-      {selected.length > 0 && <ResultCard selected={selected} />}
+      </section>
     </>
   );
 };

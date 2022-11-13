@@ -1,43 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
-    font-size: 62.5%;
-    background-color: #eee;
-    scroll-behavior: smooth;
+  font-size: 62.5%;
+  background-color: #eee;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-size: 1.6rem;
-    line-height: 1.8;
-    font-weight: 400;
-    background: white;
-    font-family: $font-opensans;
+  font-size: 1.6rem;
+  line-height: 1.8;
+  font-weight: 400;
+  background: white;
+  font-family: $font-opensans;
 }
 
-
 ul {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 p {
-    margin-bottom: 4rem;
+  margin-bottom: 4rem;
 }
-
 
 main {
-    position: relative;
-    z-index: 5;
+  position: relative;
+  z-index: 5;
 }
 
+#wrapper {
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  @include grad($purple, $blue);
+  box-sizing: border-box;
+}
 
 section {
-    &[data-anim] {
-    }
-    &[data-anim="true"] {
-    }
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  &[data-anim] {
+  }
+  &[data-anim="true"] {
+  }
 }
 
-
-
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
 
 a {
 }

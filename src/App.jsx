@@ -4,8 +4,8 @@ import { Search } from "./components/Search";
 
 export const App = () => {
   return (
-    <div className="search__container">
+    <main id="wrapper">
       <Search />
-    </div>
+    </main>
   );
 };
