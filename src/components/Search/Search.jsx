@@ -23,8 +23,8 @@ export const Search = () => {
   };
 
   useEffect(() => {
-    selected.forEach((sel) => {
-      locations.forEach((loc, index) => {
+    selected?.forEach((sel) => {
+      locations?.forEach((loc, index) => {
         if (loc.city === sel.city) {
           loc.active = true;
           locations[index] = loc;
@@ -32,7 +32,7 @@ export const Search = () => {
         }
       });
     });
-  }, [selected, locations]);
+  }, [selected, locations, searchTerm]);
 
   // Init search data
   useEffect(() => {
@@ -59,6 +59,8 @@ export const Search = () => {
         res.json().then((json) => {
           if (selected.length < 2) {
             setSelected((selected) => [...selected, json.results[0]]);
+            setSearchTerm("");
+            setClicked(false);
           }
         })
     );
@@ -115,8 +117,6 @@ export const Search = () => {
                           data-id={item.city}
                           onClick={(e) => {
                             getMeasurements(e.target.dataset.id);
-                            setSearchTerm("");
-                            setClicked(false);
                             !e.target.classList.contains(
                               "location--selected"
                             ) && e.target.classList.add("location--selected");
@@ -138,7 +138,7 @@ export const Search = () => {
           </div>
           <div className="search__compare">
             <div className="search__compare-wrap">
-              {selected.length > 0 && <ResultCard locations={selected} />}
+              {selected.length > 0 && <ResultCard locations={selected} setSelected={setSelected} />}
             </div>
           </div>
         </div>

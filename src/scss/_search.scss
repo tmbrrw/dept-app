@@ -185,9 +185,28 @@
     display: flex;
     list-style-type: none;
   }
+  button {
+    position: absolute;
+    right:2rem;
+    top: 2rem;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    background-color: black;
+    mask-image: url("data:image/svg+xml,%0A%3Csvg width='188px' height='188px' viewBox='0 0 188 188' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Artboard' transform='translate(-163.000000, -91.000000)' fill='%23000000'%3E%3Cpath d='M335.5,91.6507576 L350.349242,106.5 L271.848758,184.999758 L350.349242,263.5 L335.5,278.349242 L256.999758,199.848758 L178.5,278.349242 L163.650758,263.5 L242.150758,184.999758 L163.650758,106.5 L178.5,91.6507576 L256.999758,170.150758 L335.5,91.6507576 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    outline: 0;
+    &:hover {
+      background-color: $purple;
+      cursor: pointer;
+    }
+  }
 }
 
 .search__compare-inner {
+  position: relative;
   padding: 2.5rem;
   padding-top: 5rem;
   background: white;

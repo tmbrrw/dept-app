@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ResultCard = ({ locations }) => {
+export const ResultCard = ({ locations, setSelected }) => {
   const getDateText = (start, end) => {
     if (start) {
       let date1 = new Date(start.replace("T", " "));
@@ -31,9 +31,14 @@ export const ResultCard = ({ locations }) => {
     }
   };
 
+  const removeLocationCard = (index) => {
+    // index === 0 && locations.length === 1 ? setSelected([]) : setSelected(locations.splice(index, 1));
+   
+  }
+
   return (
     <>
-      {locations.map((location, index) => {
+      {locations?.map((location, index) => {
 
         let updated = location.measurements[0].lastUpdated;
         let params = location.measurements
@@ -41,14 +46,17 @@ export const ResultCard = ({ locations }) => {
         return (
           <div key={index} className="search__compare-card">
             <div className="search__compare-inner">
+            <button aria-label="Remove Location" onClick={() => {
+                removeLocationCard(index);
+            }}></button>
               <p className="search__updated">{getDateText(updated)}</p>
               <h2>{location.location}</h2>
               <p className="search__city">in {location.city}, United Kingdom</p>
               <div className="search__values">
                 <span>Values: </span>
               <ul>
-              {params.map((param) => {
-                return <li>{param.parameter}:  {param.value}</li>
+              {params.map((param, index) => {
+                return <li key={index}>{param.parameter}:  {param.value}</li>
               })}
               </ul>
               </div>
