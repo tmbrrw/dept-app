@@ -19,9 +19,20 @@ export const Search = () => {
         .sort()
         .filter((location) => regex.test(location.city));
     }
-
     setSuggestions(results);
   };
+
+  useEffect(() => {
+    selected.forEach((sel) => {
+      locations.forEach((loc, index) => {
+        if (loc.city === sel.city) {
+          loc.active = true;
+          locations[index] = loc;
+          setLocations(locations);
+        }
+      });
+    });
+  }, [selected, locations]);
 
   // Init search data
   useEffect(() => {
@@ -46,7 +57,9 @@ export const Search = () => {
       (res) =>
         res.ok &&
         res.json().then((json) => {
-          setSelected((selected) => [...selected, json.results[0]]);
+          if (selected.length < 2) {
+            setSelected((selected) => [...selected, json.results[0]]);
+          }
         })
     );
   };
@@ -68,13 +81,13 @@ export const Search = () => {
             <div className="search__wrap">
               <div
                 className={`search__field search--city ${
-                  clicked ? "active" : ""
+                  clicked && "search--active"
                 }`}
                 onFocus={() => {
-                  setClicked(true)
+                  setClicked(true);
                 }}
                 onBlur={(e) => {
-                  (!e.target.value) && setClicked(false)
+                  !e.target.value && setClicked(false);
                 }}
               >
                 <label>Enter city name...</label>
@@ -97,14 +110,16 @@ export const Search = () => {
                     suggestions.map((item, index) => {
                       return (
                         <li
+                          className={item.active && "location--selected"}
                           key={index}
                           data-id={item.city}
                           onClick={(e) => {
                             getMeasurements(e.target.dataset.id);
-                            if(selected.length === 1) {
-                              setSearchTerm("")
-                              setClicked(false)
-                            }
+                            setSearchTerm("");
+                            setClicked(false);
+                            !e.target.classList.contains(
+                              "location--selected"
+                            ) && e.target.classList.add("location--selected");
                           }}
                         >
                           {item.city}

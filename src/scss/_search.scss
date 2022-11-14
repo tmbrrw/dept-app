@@ -3,43 +3,6 @@
   position: relative;
   display: flex;
   padding-top: 20vh;
-  ul {
-    z-index: 1;
-    padding: 0;
-    list-style-type: none;
-    position: absolute;
-    padding-top: 7.5rem;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: white;
-    border-radius: 1rem;
-    max-width: 46.9rem;
-    margin: 0 auto;
-    max-height: 26rem;
-    overflow: scroll;
-    left: 0;
-    right: 0;
-    box-shadow: 0 0 0.4rem rgba(0,0,0,0.2);
-  }
-  li {
-    display: flex;
-    padding: 1.5rem;
-    align-items: center;
-    justify-content: space-between;
-    &:first-child {
-      padding-top: 1.9rem;
-    }
-    &:hover {
-      cursor: pointer;
-      background: #fafafa;
-    }
-    span {
-      color: #ddd;
-      font-size: 1.4rem;
-      font-weight: 500;
-    }
-  }
   input {
     font-size: inherit;
     border: 0;
@@ -87,6 +50,51 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  ul {
+    z-index: 1;
+    padding: 0;
+    list-style-type: none;
+    position: absolute;
+    padding-top: 7.5rem;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border-radius: 1rem;
+    max-width: 46.9rem;
+    margin: 0 auto;
+    max-height: 26rem;
+    overflow: scroll;
+    left: 0;
+    right: 0;
+    box-shadow: 0 0 0.4rem rgba(0,0,0,0.2);
+  }
+  li {
+    display: flex;
+    padding: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    &.location--selected {
+      pointer-events: none;
+      color: $purple;
+      font-weight: 600;
+      span {
+        color: $purple
+      }
+    }
+    &:first-child {
+      padding-top: 1.9rem;
+    }
+    &:hover {
+      cursor: pointer;
+      background: #fafafa;
+    }
+    span {
+      color: #ddd;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+  }
 }
 
 .search__field {
@@ -101,7 +109,7 @@
   border-radius: 1rem;
   border: 0.1rem solid $grey;
   padding-left: 5.5rem;
-  &.active {
+  &.search--active {
     label {
       transform: translateY(-2.2rem) scale(0.75);
     }
@@ -173,14 +181,55 @@
   h2 {
     font-weight: 700;
   }
+  ul {
+    display: flex;
+    list-style-type: none;
+  }
 }
 
 .search__compare-inner {
   padding: 2.5rem;
+  padding-top: 5rem;
   background: white;
   border-radius: 1rem;
   box-shadow: 0 0 0.4rem rgba(0,0,0,0.2);
+  line-height: 1.5;
   p {
-    font-size: inherit
+    margin: 0;
   }
+}
+
+
+.search__updated {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.025rem;
+  font-size: 1.4rem;
+}
+
+.search__values {
+  display: flex;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-size: 1.6rem;
+  span {
+    display: inline-flex;
+    margin-right: 0.5rem;
+  }
+  ul {
+    text-transform: uppercase;
+    li {
+      margin-right: 0.5rem;
+      &:after {
+        content:',';
+      }
+      &:last-child:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.search__city {
+  font-size: 1.6rem;
 }
