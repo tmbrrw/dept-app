@@ -49,9 +49,11 @@ export const Search = () => {
     getCities();
   }, []);
 
-  const getMeasurements = async (city) => {
-
-    setLoading(true);
+    const getMeasurements = async (city) => {
+    
+    if (selected.length < config.compareLimit) {
+     setLoading(true);
+    }
 
     const url = `${config.baseUrl}latest?city=${city}&order_by=lastUpdated`;
     const options = { method: "GET", headers: { accept: "application/json" } };
