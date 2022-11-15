@@ -5,6 +5,7 @@ import config from "../../config/default";
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [clicked, setClicked] = useState("");
+  const [loading, setLoading] = useState(false);
   const [locations, setLocations] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -35,7 +36,7 @@ export const Search = () => {
 
   // Init search data
   useEffect(() => {
-    const url = `${config.baseUrl}cities?country=gb&limit=${config.limit}`;
+    const url = `${config.baseUrl}cities?country=gb&limit=${config.resultsLimit}`;
     const options = { method: "GET", headers: { accept: "application/json" } };
 
     const getCities = async () => {
@@ -49,6 +50,9 @@ export const Search = () => {
   }, []);
 
   const getMeasurements = async (city) => {
+
+    setLoading(true);
+
     const url = `${config.baseUrl}latest?city=${city}&order_by=lastUpdated`;
     const options = { method: "GET", headers: { accept: "application/json" } };
 
@@ -56,10 +60,11 @@ export const Search = () => {
       (res) =>
         res.ok &&
         res.json().then((json) => {
-          if (selected.length < 2) {
+          if (selected.length < config.compareLimit) {
             setSelected((selected) => [...selected, json.results[0]]);
             setSearchTerm("");
             setClicked(false);
+            setLoading(false)
           }
         })
     );
@@ -77,7 +82,7 @@ export const Search = () => {
             </div>
           </div>
           <div>
-            <div className="search__wrap">
+            <div className={`search__wrap ${loading && "search--loading"}`}>
               <div
                 className={`search__field search--city ${
                   clicked && "search--active"
@@ -89,6 +94,7 @@ export const Search = () => {
                   !e.target.value && setClicked(false);
                 }}
               >
+                <div className="search__loader"></div>
                 <label>Enter city name...</label>
                 <input
                   autoComplete="off"

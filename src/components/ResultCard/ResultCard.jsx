@@ -72,7 +72,7 @@ export const ResultCard = ({ selected, setSelected, setLocations, setClicked, se
                 let col = 'green';
                 col = (param.value > 100) ? 'amber' : col;
                 col = (param.value > 160) ? 'red' : col;
-                return <li key={index} className={col}>{param.parameter}:  {param.value}</li>
+                return <li key={index} className={col}>{param.parameter}: {param.value}</li>
               })}
               </ul>
               </div>

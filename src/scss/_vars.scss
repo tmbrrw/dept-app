@@ -4,7 +4,7 @@
 // Colours
 $purple: #7935af;
 $blue: #4277ad;
-$grey: #bebebe;
+$grey: #aaa;
 $green: #4c9457;
 $amber: #a26a09;
 $red: #9b2121;
@@ -12,9 +12,24 @@ $red: #9b2121;
 // Fonts
 $font-opensans: 'open sans', Helvetica, Arial, sans-serif;
 
+@keyframes bgSway {
+    0% {
+        background-position: 0%;
+    }
+    50% {
+        background-position: 50%;
+    }
+    100% {
+        background-position: 0%;
+    }
+}
+
 // Mixins
 @mixin grad($start, $end) {
-    background: linear-gradient(90deg, $start, $end);
+    background-image: linear-gradient(120deg, $start 0%, $start 5%, $end 85%, $end 95%);
+    background-position: center;
+    background-size: 200%;
+    animation: bgSway 5s ease-in-out infinite;
 }
 
 @mixin icon($colour, $svg) {
