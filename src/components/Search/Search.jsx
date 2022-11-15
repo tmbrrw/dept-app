@@ -34,7 +34,7 @@ export const Search = () => {
     });
   }, [selected, locations, searchTerm]);
 
-  // Init search data
+
   useEffect(() => {
     const url = `${config.baseUrl}cities?country=gb&limit=${config.resultsLimit}`;
     const options = { method: "GET", headers: { accept: "application/json" } };
@@ -120,9 +120,6 @@ export const Search = () => {
                           data-id={item.city}
                           onClick={(e) => {
                             getMeasurements(e.target.dataset.id);
-                            // !e.target.classList.contains(
-                            //   "location--selected"
-                            // ) && e.target.classList.add("location--selected");
                           }}
                         >
                           {item.city}
