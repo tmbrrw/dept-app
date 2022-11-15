@@ -158,7 +158,7 @@
 }
 
 .search__compare {
-  padding-top: 15rem;
+  padding-top: 10rem;
   h2 {
     color: $purple
   }
@@ -173,7 +173,8 @@
 }
 
 .search__compare-card {
-  max-width: 50%;
+  max-width: 70rem;
+  margin: 0 auto;
   width: 100%;
   padding: 0 1.5rem;
   font-size: 1.8rem;
@@ -204,6 +205,15 @@
       background-color: $purple;
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .search__compare {
+    padding-top: 15rem;
+  }
+  .search__compare-card {
+    max-width: 50%;
   }
 }
 

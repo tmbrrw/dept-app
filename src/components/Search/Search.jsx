@@ -112,14 +112,14 @@ export const Search = () => {
                     suggestions.map((item, index) => {
                       return (
                         <li
-                          className={item.active && "location--selected"}
+                          className={item.active ? "location--selected" : ""}
                           key={index}
                           data-id={item.city}
                           onClick={(e) => {
                             getMeasurements(e.target.dataset.id);
-                            !e.target.classList.contains(
-                              "location--selected"
-                            ) && e.target.classList.add("location--selected");
+                            // !e.target.classList.contains(
+                            //   "location--selected"
+                            // ) && e.target.classList.add("location--selected");
                           }}
                         >
                           {item.city}
@@ -138,7 +138,14 @@ export const Search = () => {
           </div>
           <div className="search__compare">
             <div className="search__compare-wrap">
-              {selected.length > 0 && <ResultCard locations={selected} setSelected={setSelected} />}
+              {selected.length > 0 && <ResultCard 
+              selected={selected} 
+              locations={locations} 
+              setSelected={setSelected} 
+              setLocations={setLocations}
+              setClicked={setClicked}
+              setSearchTerm={setSearchTerm}
+              />}
             </div>
           </div>
         </div>

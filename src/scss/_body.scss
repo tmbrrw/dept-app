@@ -16,6 +16,10 @@ body {
   font-family: $font-opensans;
 }
 
+html, body, #root, #wrapper {
+  height: 100%;
+}
+
 ul {
   padding: 0;
   margin: 0;
@@ -31,7 +35,6 @@ main {
 }
 
 #wrapper {
-  height: 100vh;
   align-items: center;
   justify-content: center;
   @include grad($purple, $blue);
@@ -51,6 +54,7 @@ section {
   position: relative;
   width: 100%;
   margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 a {
