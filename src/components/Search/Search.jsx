@@ -37,9 +37,12 @@ export const Search = () => {
           return activeLocation === suggestions.length ? 1 : activeLocation + 1;
         });
       } else if (e.keyCode === 13) {
-        getMeasurements(suggestions[activeLocation].city)
-        setSearchTerm("")
-        setClicked(true);
+        if (!suggestions[activeLocation].active) {
+          getMeasurements(suggestions[activeLocation].city);
+          suggestions[activeLocation].active = true;
+          setSearchTerm("");
+          setClicked(true);
+        }
       }
     }
   };
