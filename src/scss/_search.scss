@@ -1,9 +1,8 @@
 .search {
   font-size: 1.6rem;
   position: relative;
-  display: flex;
-  padding-top: 20vh;
-  padding-bottom: 20vh;
+  display: flex;  
+  padding: 20vh 0;
   input {
     font-size: inherit;
     border: 0;
@@ -332,15 +331,15 @@
   z-index: 3;
   font-size: 10px;
   text-indent: -9999em;
-  border-top: 0.2rem solid rgba(0, 0, 0, 0.05);
-  border-right: 0.2rem solid rgba(0, 0, 0, 0.05);
-  border-bottom: 0.2rem solid rgba(0, 0, 0, 0.05);
-  border-left: 0.2rem solid $grey;
+  border-top: 0.1rem solid rgba(0, 0, 0, 0.05);
+  border-right: 0.1rem solid rgba(0, 0, 0, 0.05);
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.05);
+  border-left: 0.1rem solid $grey;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation: loader 1.1s infinite linear;
-  animation: loader 1.1s infinite linear;
+  -webkit-animation: loader 0.33s infinite linear;
+  animation: loader 0.33s infinite linear;
   .search--loading & {
     display: inline-block;
   }
