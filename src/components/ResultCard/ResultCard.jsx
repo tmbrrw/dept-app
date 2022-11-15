@@ -32,8 +32,10 @@ export const ResultCard = ({ locations, setSelected }) => {
   };
 
   const removeLocationCard = (index) => {
-    // index === 0 && locations.length === 1 ? setSelected([]) : setSelected(locations.splice(index, 1));
-   
+    return setSelected([
+      ...locations.slice(0, index),
+      ...locations.slice(index + 1, locations.length)
+    ])
   }
 
   return (
