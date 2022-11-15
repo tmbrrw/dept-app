@@ -14,11 +14,11 @@ This application has been developed using React JS and SASS/CSS
 
 ## Running the application
 
-`npm run build`
+#### `npm run build`
 Creates an optimised production build of the application which can then be served locally using `serve -s build` (or by configuring a local server application such as MAMP/XAMP).
 
 
-`npm start`
+#### `npm start`
 Initates development mode of the application and serve locally via port 3000 by default. 
 
 
