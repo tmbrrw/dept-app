@@ -90,6 +90,9 @@
         color: $purple;
       }
     }
+    &.location--hover {
+      background: #fafafa;
+    }
     &:first-child {
       padding-top: 1.3rem;
     }
@@ -220,7 +223,7 @@
 .search__compare-inner {
   position: relative;
   padding: 2.5rem;
-  padding-top: 5rem;
+  padding-top: 4rem;
   background: white;
   border-radius: 1rem;
   box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.2);

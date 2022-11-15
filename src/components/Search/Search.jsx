@@ -9,6 +9,7 @@ export const Search = () => {
   const [locations, setLocations] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState([]);
+  const [activeLocation, setActiveLocation] = useState(0);
 
   const handleSuggestions = (e) => {
     const value = e.target.value;
@@ -22,6 +23,29 @@ export const Search = () => {
     setSuggestions(results);
   };
 
+  const handleKeyDown = (e) => {
+    setClicked(true);
+    if (searchTerm) {
+      // UP
+      if (e.keyCode === 38) {
+        e.preventDefault();
+        setActiveLocation(() => {
+          return activeLocation === 0 ? suggestions.length : activeLocation - 1;
+        });
+        // DOWN
+      } else if (e.keyCode === 40) {
+        e.preventDefault();
+        setActiveLocation(() => {
+          return activeLocation === suggestions.length ? 1 : activeLocation + 1;
+        });
+      } else if (e.keyCode === 13) {
+        getMeasurements(suggestions[activeLocation].city)
+        setSearchTerm("")
+        setClicked(true);
+      }
+    }
+  };
+
   useEffect(() => {
     selected?.forEach((sel) => {
       locations?.forEach((loc, index) => {
@@ -33,7 +57,6 @@ export const Search = () => {
       });
     });
   }, [selected, locations, searchTerm]);
-
 
   useEffect(() => {
     const url = `${config.baseUrl}cities?country=gb&limit=${config.resultsLimit}`;
@@ -49,10 +72,9 @@ export const Search = () => {
     getCities();
   }, []);
 
-    const getMeasurements = async (city) => {
-    
+  const getMeasurements = async (city) => {
     if (selected.length < config.compareLimit) {
-     setLoading(true);
+      setLoading(true);
     }
 
     const url = `${config.baseUrl}latest?city=${city}&order_by=lastUpdated`;
@@ -66,7 +88,7 @@ export const Search = () => {
             setSelected((selected) => [...selected, json.results[0]]);
             setSearchTerm("");
             setClicked(false);
-            setLoading(false)
+            setLoading(false);
           }
         })
     );
@@ -87,7 +109,7 @@ export const Search = () => {
             <div className={`search__wrap ${loading && "search--loading"}`}>
               <div
                 className={`search__field search--city ${
-                  clicked && "search--active"
+                  clicked && searchTerm ? "search--active" : ""
                 }`}
                 onFocus={() => {
                   setClicked(true);
@@ -107,6 +129,9 @@ export const Search = () => {
                     setSearchTerm(e.target.value);
                     handleSuggestions(e);
                   }}
+                  onKeyDown={(e) => {
+                    handleKeyDown(e);
+                  }}
                 />
               </div>
               {searchTerm !== "" ? (
@@ -115,9 +140,14 @@ export const Search = () => {
                     <li>Oops, no results found</li>
                   ) : (
                     suggestions.map((item, index) => {
+                      let itemClass = "";
+                      itemClass += item.active ? "location--selected" : "";
+                      itemClass +=
+                        index === activeLocation ? " location--hover" : "";
+
                       return (
                         <li
-                          className={item.active ? "location--selected" : ""}
+                          className={itemClass}
                           key={index}
                           data-id={item.city}
                           onClick={(e) => {

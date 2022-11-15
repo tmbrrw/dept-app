@@ -19,7 +19,7 @@ Creates an optimised production build of the application which can then be serve
 
 
 #### `npm start`
-Initates development mode of the application and serve locally via port 3000 by default. 
+Initates development mode of the application and serves locally via port 3000 by default. 
 
 
 ## Notes
