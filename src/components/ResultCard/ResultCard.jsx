@@ -1,6 +1,6 @@
 import React from "react";
 
-export const ResultCard = ({ selected, locations, setSelected, setLocations, setClicked, setSearchTerm }) => {
+export const ResultCard = ({ selected, setSelected, setLocations, setClicked, setSearchTerm }) => {
   const getDateText = (start, end) => {
     if (start) {
       let date1 = new Date(start.replace("T", " "));
@@ -67,10 +67,12 @@ export const ResultCard = ({ selected, locations, setSelected, setLocations, set
               <h2>{sel.location}</h2>
               <p className="search__city">in {sel.city}, United Kingdom</p>
               <div className="search__values">
-                <span>Values: </span>
               <ul>
               {params.map((param, index) => {
-                return <li key={index}>{param.parameter}:  {param.value}</li>
+                let col = 'green';
+                col = (param.value > 100) ? 'amber' : col;
+                col = (param.value > 160) ? 'red' : col;
+                return <li key={index} className={col}>{param.parameter}:  {param.value}</li>
               })}
               </ul>
               </div>

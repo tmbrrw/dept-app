@@ -3,7 +3,6 @@ import { ResultCard } from "../ResultCard";
 import config from "../../config/default";
 
 export const Search = () => {
-  // Default states
   const [searchTerm, setSearchTerm] = useState("");
   const [clicked, setClicked] = useState("");
   const [locations, setLocations] = useState([]);
@@ -73,10 +72,8 @@ export const Search = () => {
           <div className="search__content">
             <div className="content__wrap">
               <h1>Compare your Air</h1>
-              <p>
-                Compare the air quality between cities in the UK. Select cities
-                to compare using the search bar below.
-              </p>
+              <p>Compare the air quality between cities in the UK.</p>
+              <p>Select cities to compare using the search bar below.</p>
             </div>
           </div>
           <div>
@@ -138,14 +135,15 @@ export const Search = () => {
           </div>
           <div className="search__compare">
             <div className="search__compare-wrap">
-              {selected.length > 0 && <ResultCard 
-              selected={selected} 
-              locations={locations} 
-              setSelected={setSelected} 
-              setLocations={setLocations}
-              setClicked={setClicked}
-              setSearchTerm={setSearchTerm}
-              />}
+              {selected.length > 0 && (
+                <ResultCard
+                  selected={selected}
+                  setSelected={setSelected}
+                  setLocations={setLocations}
+                  setClicked={setClicked}
+                  setSearchTerm={setSearchTerm}
+                />
+              )}
             </div>
           </div>
         </div>

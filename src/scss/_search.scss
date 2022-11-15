@@ -1,5 +1,5 @@
 .search {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   position: relative;
   display: flex;
   padding-top: 20vh;
@@ -31,12 +31,14 @@
   color: white;
   text-align: center;
   margin: 0 auto;
+  padding-bottom: 2.5rem;
   .content__wrap {
     max-width: 53rem;
     margin: 0 auto;
+    padding: 0 1.5rem;
   }
   p {
-    margin-bottom: 4.5rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -119,8 +121,8 @@
     position: absolute;
     display: inline-block;
     left: 1.7rem;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
     @include icon(
       $grey,
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='1em' height='1em'%3E%3Cpath d='M17.464 6.56a8.313 8.313 0 1 1-15.302 6.504A8.313 8.313 0 0 1 17.464 6.56zm1.38-.586C16.724.986 10.963-1.339 5.974.781.988 2.9-1.337 8.662.783 13.65c2.12 4.987 7.881 7.312 12.87 5.192 4.987-2.12 7.312-7.881 5.192-12.87zM15.691 16.75l7.029 7.03a.75.75 0 0 0 1.06-1.06l-7.029-7.03a.75.75 0 0 0-1.06 1.06z'%3E%3C/path%3E%3C/svg%3E"
@@ -176,7 +178,6 @@
   max-width: 70rem;
   margin: 0 auto;
   width: 100%;
-  padding: 0 1.5rem;
   font-size: 1.8rem;
   margin-bottom: 3rem;
   h2 {
@@ -192,28 +193,17 @@
     position: absolute;
     right:2rem;
     top: 2rem;
-    width: 2rem;
-    height: 2rem;
+    width: 1.5rem;
+    height: 1.5rem;
     border: 0;
-    background-color: black;
-    mask-image: url("data:image/svg+xml,%0A%3Csvg width='188px' height='188px' viewBox='0 0 188 188' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Artboard' transform='translate(-163.000000, -91.000000)' fill='%23000000'%3E%3Cpath d='M335.5,91.6507576 L350.349242,106.5 L271.848758,184.999758 L350.349242,263.5 L335.5,278.349242 L256.999758,199.848758 L178.5,278.349242 L163.650758,263.5 L242.150758,184.999758 L163.650758,106.5 L178.5,91.6507576 L256.999758,170.150758 L335.5,91.6507576 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    mask-size: contain;
-    mask-position: center;
-    mask-repeat: no-repeat;
+    @include icon(
+      black,
+      "data:image/svg+xml,%0A%3Csvg width='188px' height='188px' viewBox='0 0 188 188' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Artboard' transform='translate(-163.000000, -91.000000)' fill='%23000000'%3E%3Cpath d='M335.5,91.6507576 L350.349242,106.5 L271.848758,184.999758 L350.349242,263.5 L335.5,278.349242 L256.999758,199.848758 L178.5,278.349242 L163.650758,263.5 L242.150758,184.999758 L163.650758,106.5 L178.5,91.6507576 L256.999758,170.150758 L335.5,91.6507576 Z' id='Combined-Shape'%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     outline: 0;
     &:hover {
       background-color: $purple;
       cursor: pointer;
     }
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .search__compare {
-    padding-top: 15rem;
-  }
-  .search__compare-card {
-    max-width: 50%;
   }
 }
 
@@ -235,7 +225,7 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.025rem;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 .search__values {
@@ -249,18 +239,62 @@
   }
   ul {
     text-transform: uppercase;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
     li {
+      padding: 0.5rem 0.75rem;
+      line-height: 1;
+      border-radius: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+      color: white;
       margin-right: 0.5rem;
-      &:after {
-        content:',';
+      &.green {
+        background: $green;
       }
-      &:last-child:after {
-        display: none;
+      &.amber {
+        background: $amber;
+      }
+      &.red {
+        background: $red;
       }
     }
   }
 }
 
 .search__city {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+}
+
+
+
+@media screen and (min-width: 768px) {
+  .search {
+    font-size: 1.8rem;
+  }
+  .search__field:before {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+  .search__compare {
+    padding-top: 15rem;
+  }
+  .search__compare-card {
+    max-width: 50%;
+    padding: 0 1.5rem;
+  }
+  .search__content {
+    padding-bottom: 3.5rem;
+  }
+  .search__compare-card button {
+    width: 2rem;
+    height: 2rem;
+  }
+  .sesrch__updated {
+    font-size: 1.4rem;
+  }
+  .search__city {
+    font-size: 1.6rem;
+  }
 }
