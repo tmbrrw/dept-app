@@ -26,13 +26,11 @@ export const Search = () => {
   const handleKeyDown = (e) => {
     setClicked(true);
     if (searchTerm) {
-      // UP
       if (e.keyCode === 38) {
         e.preventDefault();
         setActiveLocation(() => {
           return activeLocation === 0 ? suggestions.length : activeLocation - 1;
         });
-        // DOWN
       } else if (e.keyCode === 40) {
         e.preventDefault();
         setActiveLocation(() => {
