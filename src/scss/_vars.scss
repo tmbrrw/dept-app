@@ -34,8 +34,12 @@ $font-opensans: 'open sans', Helvetica, Arial, sans-serif;
 
 @mixin icon($colour, $svg) {
     mask-image: url($svg);
+    -webkit-mask-image: url($svg);
     mask-position: center;
+    -webkit-mask-position: center;
     mask-size: contain;
+    -webkit-mask-size: contain;
     mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
     background-color: $colour;
 }
